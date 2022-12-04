@@ -10,13 +10,15 @@ MAIN_DB_PASSWORD = process.env.MAIN_DB_PASSWORD
 MAIN_DB_DATABASE = process.env.MAIN_DB_DATABASE
 
 // CONNECTION
-exports.main_db_connection = knex({
+const main_db_connection = knex({
     client: 'mysql2',
     connection: {
         host: MAIN_DB_HOST,
         port: MAIN_DB_PORT,
         user: MAIN_DB_USER,
         password: MAIN_DB_PASSWORD,
-        database: MAIN_DB_DATABASE
+        database: MAIN_DB_DATABASE,
     }
 });
+
+module.exports = main_db_connection;

@@ -4,10 +4,13 @@ const express = require('express');
 const app = express();
 const port = 8000;
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+// FILE IMPORTS
+// ROUTES
+const users = require('./Endpoints/users');
+
+app.use('/', users);
 
 app.listen(port);
 
-export default app;
+
+
