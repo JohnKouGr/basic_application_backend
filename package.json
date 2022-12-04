@@ -1,0 +1,9 @@
+{
+    "scripts": {
+        "start": "node app.js"
+    },
+    "dependencies": {
+        "knex": "^2.3.0",
+        "mysql2": "^2.3.3"
+    }
+}
