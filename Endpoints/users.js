@@ -5,13 +5,12 @@ const app = express.Router();
 // FILE IMPORTS
 const { select_all_users } = require('../Database/Queries/Main_db/select');
 
-app.get('/users', (req, res) => {
-
-    const users = select_all_users();
+app.get('/users', async (req, res) => {
+    const users = await select_all_users();
 
     if (!users) res.status(500).send("Missing data!");
- 
-    res.send(users);
+
+    res.status(200).send({ users: users });
 });
 
 module.exports = app;
