@@ -6,11 +6,15 @@ const app = express.Router();
 const { select_all_users } = require('../Database/Queries/Main_db/select');
 
 app.get('/users', async (req, res) => {
-    const users = await select_all_users();
+    try {
+        const users = await select_all_users();
 
-    if (!users) res.status(500).send("Missing data!");
+        if (!users) res.status(500).send("Missing data!");
 
-    res.status(200).send({ users: users });
+        res.status(200).send({ users: users });
+    } catch (err) {
+        console.log(err);
+    }
 });
 
 module.exports = app;

@@ -12,3 +12,9 @@ exports.select_user_by_id = async (user_id) => {
 
     return user;
 }
+
+exports.select_user_by_username = async (username) => {
+    const user = await knex_main.select('*').from('user').where({user_username : username}).first();
+
+    return user;
+}
