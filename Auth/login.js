@@ -20,12 +20,27 @@ app.post('/login', async (req, res) => {
         if (!correct_password) res.status(500).send('Account doesnt exist.');
 
         const token = generateAccessToken(req.body.username);
+        const tokenR = generateAccessToken(req.body.username);
 
-        res.status(200).send({ access_token: token, refresh_token: 'Something else...' });
+        res.status(200).send({ access_token: token, refresh_token: tokenR });
     } catch (err) {
         console.log(err);
+        if (res != null) res.status(500).send('Unexpected error');
     }
 
+});
+
+app.post('/verifytoken', async (req, res) => {
+    try {
+        const token = req.headers.authorization.split(' ')[1];
+
+        if (!token) res.status(422).send('Token is required!');
+
+        res.status(200).send({ token: token, username: username });
+    } catch (err) {
+        console.log(err);
+        if (res != null) res.status(500).send('Unexpected error!!');
+    }
 });
 
 module.exports = app;

@@ -14,6 +14,7 @@ app.get('/users', async (req, res) => {
         res.status(200).send({ users: users });
     } catch (err) {
         console.log(err);
+        if(res != null) res.status(500).send('Unexpected problem.');
     }
 });
 
