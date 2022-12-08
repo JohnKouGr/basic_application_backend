@@ -5,8 +5,9 @@ require('dotenv').config();
 // ACCESS_TOKEN_EXPIRATION_TIME = '3600';
 SECRET_TOKEN = process.env.TOKEN_SECRET
 
-const generateAccessToken = (username) => {
-  return jwt.sign(username, SECRET_TOKEN);
+exports.generateAccessToken = (username) => {
+  return jwt.sign(username + " " + "a" + " " + Math.random(), SECRET_TOKEN);
 }
-
-module.exports = generateAccessToken;
+exports.generateRefreshToken = (username) => {
+  return jwt.sign(username + " " + "r" + " " + Date.now(), SECRET_TOKEN);
+}

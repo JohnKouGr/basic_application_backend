@@ -8,7 +8,7 @@ const { insert_into_user } = require('../Database/Queries/Main_db/insert');
 const { select_user_by_username } = require('../Database/Queries/Main_db/select');
 const { currentDate } = require('../DateManipulation/newDate');
 
-app.post('/register', async (req, res) => {
+app.post('/register', async (req, res,next) => {
     try {
         if (!req.body.username || !req.body.password) res.status(422).send('Username and password is needed.');
 
@@ -19,11 +19,11 @@ app.post('/register', async (req, res) => {
         const hashed_password = await bcrypt.hash(req.body.password, 10);
         const user = await insert_into_user(req.body.username, hashed_password, currentDate());
 
-        res.status(200).send({ user_id: user[0] });
+        res.status(200).send({ user: user });
 
     } catch (err) {
         console.log(err);
-        if(res != null) res.status(500).send('Unexpected err.');
+        return next();
     }
 });
 

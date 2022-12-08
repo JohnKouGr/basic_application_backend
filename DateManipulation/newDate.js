@@ -1,10 +1,7 @@
 
 
-exports.currentDate = () =>{
-    const date = new Date();
-    const year = date.getFullYear();
-    const month = date.getMonth();
-    const day = date.getDay();
-
-    return `${year}-${month}-${day}`;
+exports.currentDate = () => {
+    let date = new Date().toLocaleDateString();
+    date = date.toString();
+    return date;
 }
